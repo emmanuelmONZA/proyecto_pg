@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane style="-fx-background-color: #F3F7FA;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hospital.practicantes.controllers.RotacionController">
+
+    <top>
+        <VBox spacing="4.0" style="-fx-padding: 24 24 12 24;">
+            <Label text="Cronograma y Rotaciones"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #1E3A5F;" />
+            <Label text="Programacion mensual de areas, franjas horarias, cupo maximo y docente para evitar sobreocupacion."
+                   wrapText="true"
+                   style="-fx-font-size: 13px; -fx-text-fill: #6B7280;" />
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="14.0"
+              style="-fx-background-color: white; -fx-background-radius: 14;
+                     -fx-border-color: #E5E7EB; -fx-border-radius: 14; -fx-padding: 20;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);">
+
+            <!-- Encabezado con mes -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <VBox spacing="2">
+                    <Label text="Horario del mes"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1E3A5F;" />
+                    <Label fx:id="lblMesActual" text="Mayo 2026"
+                           style="-fx-font-size: 12px; -fx-text-fill: #9CA3AF;" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label text="Cronograma mensual"
+                       style="-fx-background-color: #DBEAFE; -fx-text-fill: #1E3A5F;
+                              -fx-padding: 5 12; -fx-background-radius: 20;
+                              -fx-font-size: 12px; -fx-font-weight: bold;" />
+            </HBox>
+
+            <!-- Leyenda + Filtros -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <!-- Leyenda -->
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <StackPane prefWidth="12" prefHeight="12"
+                               style="-fx-background-color: #1F8A8A; -fx-background-radius: 3;" />
+                    <Label text="Manana" style="-fx-font-size: 11px; -fx-text-fill: #6B7280;" />
+                </HBox>
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <StackPane prefWidth="12" prefHeight="12"
+                               style="-fx-background-color: #E07B39; -fx-background-radius: 3;" />
+                    <Label text="Tarde" style="-fx-font-size: 11px; -fx-text-fill: #6B7280;" />
+                </HBox>
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <StackPane prefWidth="12" prefHeight="12"
+                               style="-fx-background-color: #5A4B8A; -fx-background-radius: 3;" />
+                    <Label text="Noche" style="-fx-font-size: 11px; -fx-text-fill: #6B7280;" />
+                </HBox>
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <!-- Botones filtro -->
+                <Button fx:id="btnTodos" text="Todos" onAction="#filtrarTodos"
+                        style="-fx-background-color: #1A56DB; -fx-text-fill: white;
+                               -fx-background-radius: 20; -fx-padding: 5 14;
+                               -fx-font-size: 11px; -fx-cursor: hand;" />
+                <Button fx:id="btnManana" text="Manana" onAction="#filtrarManana"
+                        style="-fx-background-color: #E5F6F6; -fx-text-fill: #1F8A8A;
+                               -fx-background-radius: 20; -fx-padding: 5 14;
+                               -fx-font-size: 11px; -fx-cursor: hand;" />
+                <Button fx:id="btnTarde" text="Tarde" onAction="#filtrarTarde"
+                        style="-fx-background-color: #FEF0E7; -fx-text-fill: #E07B39;
+                               -fx-background-radius: 20; -fx-padding: 5 14;
+                               -fx-font-size: 11px; -fx-cursor: hand;" />
+                <Button fx:id="btnNoche" text="Noche" onAction="#filtrarNoche"
+                        style="-fx-background-color: #EDE9F6; -fx-text-fill: #5A4B8A;
+                               -fx-background-radius: 20; -fx-padding: 5 14;
+                               -fx-font-size: 11px; -fx-cursor: hand;" />
+            </HBox>
+
+            <!-- Tarjetas -->
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="420"
+                        style="-fx-background: transparent; -fx-background-color: transparent;">
+                <FlowPane fx:id="panelRotaciones" hgap="14" vgap="14" prefWrapLength="600"
+                          style="-fx-padding: 4;" />
+            </ScrollPane>
+
+        </VBox>
+        <BorderPane.margin>
+            <Insets bottom="24.0" left="24.0" right="12.0" top="0.0" />
+        </BorderPane.margin>
+    </center>
+
+    <right>
+        <ScrollPane fitToWidth="true" prefWidth="320"
+                    style="-fx-background-color: transparent; -fx-background: transparent;">
+            <content>
+                <VBox spacing="10.0"
+                      style="-fx-background-color: white; -fx-background-radius: 14;
+                             -fx-border-color: #E5E7EB; -fx-border-radius: 14; -fx-padding: 20;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);">
+
+                    <Label fx:id="lblTituloFormulario" text="Nueva rotacion mensual"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1E3A5F;" />
+
+                    <Label text="Area o servicio"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtArea" promptText="Urgencias, Pediatria..."
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <Label text="Fecha inicio"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtFechaInicio" promptText="2026-05-01"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <Label text="Fecha fin"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtFechaFin" promptText="2026-05-31"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <Label text="Hora inicio (HH:mm)"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtHoraInicio" promptText="07:00"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <Label text="Hora fin (HH:mm)"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtHoraFin" promptText="09:00"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <Label text="Cupo maximo del servicio"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtCupo" promptText="Ej: 15"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <Label text="Docente acompanante"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtDocente" promptText="Nombre del docente"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <!-- Mensaje feedback -->
+                    <Label fx:id="lblMensaje" text="" wrapText="true"
+                           style="-fx-font-size: 12px; -fx-text-fill: #059669;" />
+
+                    <!-- Botones -->
+                    <HBox spacing="8">
+                        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                                mnemonicParsing="false"
+                                onAction="#guardarRotacion" text="Guardar"
+                                style="-fx-background-color: #1A56DB; -fx-text-fill: white;
+                                       -fx-font-weight: bold; -fx-background-radius: 9;
+                                       -fx-padding: 11; -fx-font-size: 13px; -fx-cursor: hand;" />
+                        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                                mnemonicParsing="false"
+                                onAction="#limpiarFormulario" text="Cancelar"
+                                style="-fx-background-color: #F3F4F6; -fx-text-fill: #374151;
+                                       -fx-font-weight: bold; -fx-background-radius: 9;
+                                       -fx-padding: 11; -fx-font-size: 13px; -fx-cursor: hand;" />
+                    </HBox>
+
+                    <!-- Reglas -->
+                    <VBox spacing="6"
+                          style="-fx-background-color: #FFFBEB; -fx-background-radius: 10; -fx-padding: 14;">
+                        <Label text="⚠ Reglas de validacion"
+                               style="-fx-font-weight: bold; -fx-text-fill: #92400E; -fx-font-size: 12px;" />
+                        <Label text="✔ Franja horaria activa en el cronograma"
+                               style="-fx-font-size: 11px; -fx-text-fill: #374151;" />
+                        <Label text="✔ Cupo del servicio no superado"
+                               style="-fx-font-size: 11px; -fx-text-fill: #374151;" />
+                        <Label text="✔ Docente ya registrado como presente"
+                               style="-fx-font-size: 11px; -fx-text-fill: #374151;" />
+                    </VBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+        <BorderPane.margin>
+            <Insets bottom="24.0" left="12.0" right="24.0" top="0.0" />
+        </BorderPane.margin>
+    </right>
+
+</BorderPane>

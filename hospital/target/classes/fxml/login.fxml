@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="650.0"
+            prefWidth="1100.0"
+            style="-fx-background-color: white;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hospital.practicantes.controllers.LoginController">
+
+    <!-- PANEL IZQUIERDO: formulario -->
+    <left>
+        <VBox prefWidth="480.0"
+              alignment="CENTER_LEFT"
+              spacing="0"
+              style="-fx-background-color: white; -fx-padding: 60 56 40 56;">
+
+            <!-- Logo + nombre -->
+            <HBox spacing="14" alignment="CENTER_LEFT">
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #1A56DB; -fx-background-radius: 10; -fx-padding: 10 12;">
+                    <Text text="+" style="-fx-fill: white; -fx-font-size: 30px; -fx-font-weight: bold;" />
+                </VBox>
+                <VBox spacing="1">
+                    <Label text="HOSPITAL"
+                           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1A3A6B;" />
+                    <Label text="SAN RAFAEL"
+                           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1A3A6B;" />
+                </VBox>
+            </HBox>
+
+            <Region prefHeight="32" />
+
+            <!-- Título -->
+            <Label text="Sistema de Control de"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #111827;" />
+            <Label text="Prácticas Estudiantiles"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #111827;" />
+
+            <Region prefHeight="36" />
+
+            <!-- Campo Usuario -->
+            <Label text="Usuario"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F2937;" />
+            <Region prefHeight="6" />
+            <TextField fx:id="txtUsuario"
+                       promptText="Ingrese su usuario"
+                       style="-fx-background-radius: 8;
+                              -fx-border-radius: 8;
+                              -fx-border-color: #D1D5DB;
+                              -fx-border-width: 1.5;
+                              -fx-padding: 12 14;
+                              -fx-font-size: 14px;
+                              -fx-background-color: white;" />
+
+            <Region prefHeight="18" />
+
+            <!-- Campo Contraseña -->
+            <Label text="Contraseña"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1F2937;" />
+            <Region prefHeight="6" />
+            <PasswordField fx:id="txtContrasena"
+                           promptText="Ingrese su contraseña"
+                           style="-fx-background-radius: 8;
+                                  -fx-border-radius: 8;
+                                  -fx-border-color: #D1D5DB;
+                                  -fx-border-width: 1.5;
+                                  -fx-padding: 12 14;
+                                  -fx-font-size: 14px;
+                                  -fx-background-color: white;" />
+
+            <Region prefHeight="28" />
+
+            <!-- Botón Iniciar sesión -->
+            <Button maxWidth="Infinity"
+                    mnemonicParsing="false"
+                    onAction="#ingresar"
+                    text="Iniciar sesión"
+                    style="-fx-background-color: #1A56DB;
+                           -fx-text-fill: white;
+                           -fx-font-weight: bold;
+                           -fx-font-size: 15px;
+                           -fx-background-radius: 9;
+                           -fx-padding: 14;
+                           -fx-cursor: hand;" />
+
+            <Region prefHeight="14" />
+
+            <!-- Mensaje de error -->
+            <HBox alignment="CENTER">
+                <Label fx:id="lblMensaje"
+                       text=""
+                       style="-fx-text-fill: #DC2626; -fx-font-size: 12px;" />
+            </HBox>
+
+            <Region prefHeight="10" />
+
+            
+
+            <Region VBox.vgrow="ALWAYS" />
+
+
+        </VBox>
+    </left>
+
+    <!-- PANEL DERECHO: imagen/fondo azul con texto superpuesto -->
+    <center>
+    <StackPane>
+
+        <!-- Imagen de fondo -->
+       <ImageView fx:id="imgHospital" fitWidth="620" fitHeight="650" preserveRatio="false" />
+
+        <!-- Overlay oscuro encima de la imagen -->
+        <Region style="-fx-background-color: rgba(0,0,0,0.35);" />
+
+        <!-- Texto encima del overlay -->
+        <VBox alignment="BOTTOM_LEFT" style="-fx-padding: 40;">
+            <Label text="Hospital Universitario San Rafael"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label text="Tunja, Boyacá"
+                   style="-fx-font-size: 15px; -fx-text-fill: #CBD5E1;" />
+        </VBox>
+
+    </StackPane>
+</center>
+
+</BorderPane>

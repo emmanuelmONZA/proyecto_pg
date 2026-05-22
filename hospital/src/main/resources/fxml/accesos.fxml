@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane style="-fx-background-color: #F3F7FA;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hospital.practicantes.controllers.AccesoController">
+
+    <top>
+        <VBox spacing="4.0" style="-fx-padding: 24 24 12 24;">
+            <Label text="Control de Accesos"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #1E3A5F;" />
+            <Label text="Registro de entrada y salida por servicio — trazabilidad nominal para saber quienes estan dentro del hospital."
+                   wrapText="true"
+                   style="-fx-font-size: 13px; -fx-text-fill: #6B7280;" />
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="14.0">
+
+            <!-- Tarjetas de resumen rápido -->
+            <HBox spacing="12">
+                <VBox prefWidth="150" spacing="6"
+                      style="-fx-background-color: white; -fx-background-radius: 12;
+                             -fx-border-color: #E5E7EB; -fx-border-radius: 12; -fx-padding: 16;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+                    <Label fx:id="lblTotalAdentro" text="0"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1A56DB;" />
+                    <Label text="Adentro ahora"
+                           style="-fx-font-size: 11px; -fx-text-fill: #6B7280;" />
+                </VBox>
+                <VBox prefWidth="150" spacing="6"
+                      style="-fx-background-color: white; -fx-background-radius: 12;
+                             -fx-border-color: #E5E7EB; -fx-border-radius: 12; -fx-padding: 16;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+                    <Label fx:id="lblTotalEntradas" text="0"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #10B981;" />
+                    <Label text="Entradas hoy"
+                           style="-fx-font-size: 11px; -fx-text-fill: #6B7280;" />
+                </VBox>
+                <VBox prefWidth="150" spacing="6"
+                      style="-fx-background-color: white; -fx-background-radius: 12;
+                             -fx-border-color: #E5E7EB; -fx-border-radius: 12; -fx-padding: 16;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+                    <Label fx:id="lblTotalSalidas" text="0"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #DC2626;" />
+                    <Label text="Salidas hoy"
+                           style="-fx-font-size: 11px; -fx-text-fill: #6B7280;" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <!-- Botón evacuación -->
+                <Button fx:id="btnEvacuacion" text="🚨  Lista de Evacuacion"
+                        onAction="#mostrarEvacuacion"
+                        style="-fx-background-color: #DC2626; -fx-text-fill: white;
+                               -fx-font-weight: bold; -fx-background-radius: 10;
+                               -fx-padding: 12 18; -fx-font-size: 13px; -fx-cursor: hand;" />
+            </HBox>
+
+            <!-- Tabla de movimientos -->
+            <VBox spacing="12"
+                  style="-fx-background-color: white; -fx-background-radius: 14;
+                         -fx-border-color: #E5E7EB; -fx-border-radius: 14; -fx-padding: 20;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);">
+
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <VBox spacing="2">
+                        <Label text="Movimientos del dia"
+                               style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1E3A5F;" />
+                        <Label text="Haz clic en una fila para cargar datos"
+                               style="-fx-font-size: 11px; -fx-text-fill: #9CA3AF;" />
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <!-- Buscador -->
+                    <TextField fx:id="txtBuscar"
+                               promptText="🔍  Buscar practicante..."
+                               prefWidth="220"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 8 12;
+                                      -fx-font-size: 13px;" />
+                    <!-- Filtros -->
+                    <Button fx:id="btnTodos" text="Todos" onAction="#filtrarTodos"
+                            style="-fx-background-color: #1A56DB; -fx-text-fill: white;
+                                   -fx-background-radius: 20; -fx-padding: 5 14;
+                                   -fx-font-size: 11px; -fx-cursor: hand;" />
+                    <Button fx:id="btnEntradas" text="Entradas" onAction="#filtrarEntradas"
+                            style="-fx-background-color: #ECFDF5; -fx-text-fill: #059669;
+                                   -fx-background-radius: 20; -fx-padding: 5 14;
+                                   -fx-font-size: 11px; -fx-cursor: hand;" />
+                    <Button fx:id="btnSalidas" text="Salidas" onAction="#filtrarSalidas"
+                            style="-fx-background-color: #FEF2F2; -fx-text-fill: #DC2626;
+                                   -fx-background-radius: 20; -fx-padding: 5 14;
+                                   -fx-font-size: 11px; -fx-cursor: hand;" />
+                </HBox>
+
+                <TableView fx:id="tablaAccesos" prefHeight="340"
+                           style="-fx-background-radius: 10; -fx-border-color: #E5E7EB;
+                                  -fx-border-radius: 10;">
+                    <columns>
+                        <TableColumn fx:id="colId"          text="ID"          prefWidth="45" />
+                        <TableColumn fx:id="colPracticante" text="Practicante" prefWidth="170" />
+                        <TableColumn fx:id="colFecha"       text="Fecha"       prefWidth="110" />
+                        <TableColumn fx:id="colHora"        text="Hora"        prefWidth="80" />
+                        <TableColumn fx:id="colServicio"    text="Servicio"    prefWidth="140" />
+                        <TableColumn fx:id="colTipo"        text="Tipo"        prefWidth="100" />
+                    </columns>
+                    <placeholder>
+                        <Label text="No hay registros de acceso aun."
+                               style="-fx-text-fill: #9CA3AF; -fx-font-size: 13px;" />
+                    </placeholder>
+                </TableView>
+
+            </VBox>
+        </VBox>
+        <BorderPane.margin>
+            <Insets bottom="24.0" left="24.0" right="12.0" top="0.0" />
+        </BorderPane.margin>
+    </center>
+
+    <right>
+        <ScrollPane fitToWidth="true" prefWidth="320"
+                    style="-fx-background-color: transparent; -fx-background: transparent;">
+            <content>
+                <VBox spacing="10"
+                      style="-fx-background-color: white; -fx-background-radius: 14;
+                             -fx-border-color: #E5E7EB; -fx-border-radius: 14; -fx-padding: 20;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);">
+
+                    <Label fx:id="lblTituloFormulario" text="Registrar acceso"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1E3A5F;" />
+
+                    <Label text="Practicante"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtPracticante" promptText="Nombre del estudiante"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <Label text="Fecha (yyyy-MM-dd)"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtFecha" promptText="2026-05-17"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <Label text="Hora (HH:mm)"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtHora" promptText="08:00"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <Label text="Servicio"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <TextField fx:id="txtServicio" promptText="Urgencias, Pediatria..."
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+
+                    <!-- Tipo con botones toggle -->
+                    <Label text="Tipo de acceso"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+                    <HBox spacing="8">
+                        <Button fx:id="btnTipoEntrada" text="✅  Entrada"
+                                onAction="#seleccionarEntrada"
+                                maxWidth="Infinity" HBox.hgrow="ALWAYS"
+                                style="-fx-background-color: #ECFDF5; -fx-text-fill: #059669;
+                                       -fx-font-weight: bold; -fx-background-radius: 8;
+                                       -fx-padding: 10; -fx-cursor: hand;
+                                       -fx-border-color: #6EE7B7; -fx-border-radius: 8;" />
+                        <Button fx:id="btnTipoSalida" text="🚪  Salida"
+                                onAction="#seleccionarSalida"
+                                maxWidth="Infinity" HBox.hgrow="ALWAYS"
+                                style="-fx-background-color: #F9FAFB; -fx-text-fill: #6B7280;
+                                       -fx-font-weight: bold; -fx-background-radius: 8;
+                                       -fx-padding: 10; -fx-cursor: hand;
+                                       -fx-border-color: #E5E7EB; -fx-border-radius: 8;" />
+                    </HBox>
+                    <TextField fx:id="txtTipo" promptText="Entrada | Salida"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8;
+                                      -fx-border-color: #D1D5DB; -fx-padding: 9;
+                                      -fx-font-size: 13px; -fx-opacity: 0.6;"
+                               editable="false" />
+
+                    <!-- Mensaje feedback -->
+                    <Label fx:id="lblMensaje" text="" wrapText="true"
+                           style="-fx-font-size: 12px; -fx-text-fill: #059669;" />
+
+                    <!-- Botones -->
+                    <HBox spacing="8">
+                        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                                mnemonicParsing="false"
+                                onAction="#guardarAcceso" text="Guardar acceso"
+                                style="-fx-background-color: #1A56DB; -fx-text-fill: white;
+                                       -fx-font-weight: bold; -fx-background-radius: 9;
+                                       -fx-padding: 11; -fx-font-size: 13px; -fx-cursor: hand;" />
+                        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                                mnemonicParsing="false"
+                                onAction="#limpiarFormulario" text="Cancelar"
+                                style="-fx-background-color: #F3F4F6; -fx-text-fill: #374151;
+                                       -fx-font-weight: bold; -fx-background-radius: 9;
+                                       -fx-padding: 11; -fx-font-size: 13px; -fx-cursor: hand;" />
+                    </HBox>
+
+                    <!-- Validaciones -->
+                    <VBox spacing="6"
+                          style="-fx-background-color: #EFF6FF; -fx-background-radius: 10; -fx-padding: 14;">
+                        <Label text="✔ Validaciones antes de permitir ingreso"
+                               style="-fx-font-weight: bold; -fx-text-fill: #1E3A5F; -fx-font-size: 12px;" />
+                        <Label text="✔ Esta en el cronograma mensual"
+                               style="-fx-font-size: 11px; -fx-text-fill: #374151;" />
+                        <Label text="✔ Documentos e induccion vigentes"
+                               style="-fx-font-size: 11px; -fx-text-fill: #374151;" />
+                        <Label text="✔ ARL activa y seguro al dia"
+                               style="-fx-font-size: 11px; -fx-text-fill: #374151;" />
+                        <Label text="✔ Docente ya ingreso al servicio"
+                               style="-fx-font-size: 11px; -fx-text-fill: #374151;" />
+                        <Label text="✔ Servicio con cupo disponible"
+                               style="-fx-font-size: 11px; -fx-text-fill: #374151;" />
+                    </VBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+        <BorderPane.margin>
+            <Insets bottom="24.0" left="12.0" right="24.0" top="0.0" />
+        </BorderPane.margin>
+    </right>
+
+</BorderPane>

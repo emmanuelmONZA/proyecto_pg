@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="panelPrincipal"
+            prefHeight="650.0"
+            prefWidth="1000.0"
+            style="-fx-background-color: #F3F7FA;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hospital.practicantes.controllers.MainController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT"
+              spacing="12.0"
+              style="-fx-background-color: white; -fx-border-color: #D8E3E7;
+                     -fx-border-width: 0 0 1 0;">
+            <padding>
+                <Insets bottom="14.0" left="22.0" right="22.0" top="14.0" />
+            </padding>
+            <Label text="Hospital Universitario San Rafael"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1E3A5F;" />
+            <Label text="Sistema de asistencia de practicantes"
+                   style="-fx-font-size: 13px; -fx-text-fill: #6B7F86;" />
+        </HBox>
+    </top>
+
+    <left>
+        <VBox prefWidth="220.0"
+              spacing="12.0"
+              style="-fx-padding: 22; -fx-background-color: #1E3A5F;">
+            <Label text="Menu"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label text="Control academico y hospitalario"
+                   wrapText="true"
+                   style="-fx-font-size: 11px; -fx-text-fill: #A8C4E0;" />
+
+            <Button maxWidth="Infinity" mnemonicParsing="false"
+                    onAction="#abrirInicio" text="Inicio"
+                    style="-fx-background-color: #1A56DB; -fx-text-fill: white;
+                           -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 10;" />
+            <Button maxWidth="Infinity" mnemonicParsing="false"
+                    onAction="#abrirPracticantes" text="Practicantes"
+                    style="-fx-background-color: transparent; -fx-border-color: #4B7BCC;
+                           -fx-text-fill: white; -fx-background-radius: 8;
+                           -fx-border-radius: 8; -fx-padding: 10;" />
+            <Button maxWidth="Infinity" mnemonicParsing="false"
+                    onAction="#abrirRotaciones" text="Cronograma / Rotaciones"
+                    style="-fx-background-color: transparent; -fx-border-color: #4B7BCC;
+                           -fx-text-fill: white; -fx-background-radius: 8;
+                           -fx-border-radius: 8; -fx-padding: 10;" />
+            <Button maxWidth="Infinity" mnemonicParsing="false"
+                    onAction="#abrirAccesos" text="Control de accesos"
+                    style="-fx-background-color: transparent; -fx-border-color: #4B7BCC;
+                           -fx-text-fill: white; -fx-background-radius: 8;
+                           -fx-border-radius: 8; -fx-padding: 10;" />
+
+            <VBox VBox.vgrow="ALWAYS" />
+
+            <Button maxWidth="Infinity" mnemonicParsing="false"
+                    onAction="#cerrarSesion" text="Cerrar sesion"
+                    style="-fx-background-color: #E8EEF8; -fx-text-fill: #1E3A5F;
+                           -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 10;" />
+        </VBox>
+    </left>
+</BorderPane>
