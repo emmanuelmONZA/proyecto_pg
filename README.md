@@ -17,6 +17,22 @@
 
 ---
 
+## Pagina de Inicio 🤩
+
+<p align="center">
+  <img width="1233" height="812" alt="Captura de pantalla 2026-05-22 201028" src="https://github.com/user-attachments/assets/7636bdf9-5c5c-40ab-b4e5-20192ec719b4" />
+</p>
+
+---
+
+## Apartado de Control de Accesos 👔
+
+<p align="center">
+<img width="1247" height="811" alt="Captura de pantalla 2026-05-22 201334" src="https://github.com/user-attachments/assets/80bd03d0-f29c-4411-8523-18123b603fe5" />
+</p>
+
+---
+
 ## Descripción del proyecto 📋
 
 El proyecto integrador **Hospital San Rafael** es un sistema orientado a la gestión hospitalaria, desarrollado con el propósito de optimizar procesos de practicas universitarias dentro de las instalaciones.
@@ -35,7 +51,7 @@ El sistema permite administrar módulos relacionados con usuarios, autenticació
 
 ## Tecnologías utilizadas 🛠️
 - SQL
-- PostgreSQL  
+- PostgreSQL
 - Java
 
 ---
