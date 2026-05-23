@@ -222,7 +222,7 @@ public class RotacionController {
             if (hora < 12) return "manana";
             if (hora < 18) return "tarde";
             return "noche";
-        } catch (Exception e) { return "manana"; }
+        } catch (Exception e) { return "mañana"; }
     }
 
     private String badgeBg(String turno) {

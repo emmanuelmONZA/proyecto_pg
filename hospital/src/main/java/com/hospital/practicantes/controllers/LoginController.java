@@ -25,6 +25,14 @@ public void initialize() {
     try {
         Image img = new Image(getClass().getResourceAsStream("/images/hospital.jpg"));
         imgHospital.setImage(img);
+        
+        // Que la imagen crezca con la ventana
+        imgHospital.fitWidthProperty().bind(
+            imgHospital.getParent().layoutBoundsProperty().map(b -> b.getWidth())
+        );
+        imgHospital.fitHeightProperty().bind(
+            imgHospital.getParent().layoutBoundsProperty().map(b -> b.getHeight())
+        );
     } catch (Exception e) {
         System.out.println("No se pudo cargar la imagen: " + e.getMessage());
     }

@@ -3,9 +3,12 @@ package com.hospital.practicantes.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class MainController {
 
@@ -13,7 +16,6 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        // Al abrir la pantalla principal se muestra el panel de inicio
         cargarVista("/fxml/inicio.fxml");
     }
 
@@ -24,13 +26,22 @@ public class MainController {
 
     @FXML
     private void cerrarSesion() {
-        try {
-            Parent login = FXMLLoader.load(
-                    getClass().getResource("/fxml/login.fxml"));
-            panelPrincipal.getScene().setRoot(login);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Cerrar sesion");
+        confirmacion.setHeaderText("¿Esta seguro que desea cerrar sesion?");
+        confirmacion.setContentText("Se perderan los datos no guardados.");
+
+        Optional<ButtonType> resultado = confirmacion.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            try {
+                Parent login = FXMLLoader.load(
+                        getClass().getResource("/fxml/login.fxml"));
+                panelPrincipal.getScene().setRoot(login);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        // Si presiona Cancelar o cierra el dialogo, no hace nada
     }
 
     private void cargarVista(String ruta) {

@@ -25,10 +25,11 @@
 
     <!-- PANEL IZQUIERDO: formulario -->
     <left>
-        <VBox prefWidth="480.0"
-              alignment="CENTER_LEFT"
-              spacing="0"
-              style="-fx-background-color: white; -fx-padding: 60 56 40 56;">
+    <VBox prefWidth="420.0"
+          maxWidth="420.0"
+          alignment="CENTER_LEFT"
+          spacing="0"
+          style="-fx-background-color: white; -fx-padding: 60 56 40 56;">
 
             <!-- Logo + nombre -->
             <HBox spacing="14" alignment="CENTER_LEFT">
@@ -122,8 +123,11 @@
     <center>
     <StackPane>
 
-        <!-- Imagen de fondo -->
-       <ImageView fx:id="imgHospital" fitWidth="620" fitHeight="650" preserveRatio="false" />
+       <ImageView fx:id="imgHospital" 
+           preserveRatio="false"
+           style="-fx-alignment: center;">
+    <StackPane.alignment>CENTER</StackPane.alignment>
+</ImageView>
 
         <!-- Overlay oscuro encima de la imagen -->
         <Region style="-fx-background-color: rgba(0,0,0,0.35);" />

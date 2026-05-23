@@ -10,13 +10,14 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        // Se carga el FXML usando getResource desde el módulo
         FXMLLoader loader = new FXMLLoader(
                 MainApp.class.getResource("/fxml/login.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 1000, 650);
         stage.setTitle("Hospital San Rafael — Monitoreo de Practicantes");
-        stage.setResizable(false);
+        stage.setResizable(true);
+        stage.setMinWidth(900);
+        stage.setMinHeight(600);
         stage.setScene(scene);
         stage.show();
     }
