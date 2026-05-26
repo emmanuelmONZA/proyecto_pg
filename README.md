@@ -1,7 +1,7 @@
 <h1 align="center">Proyecto integrador (Hospital San Rafael) 🚑🏥</h1>
 
 ## Desarrolladores 👨🏻‍💻
-- Emanuel Monsalve Salazar  
+- Emmanuel Monsalve Salazar  
 - Adiel Faidiber Cuevas  
 - David Santiago Rivero Quiñones  
 - Julian Mateo Saavedra Rondon  
