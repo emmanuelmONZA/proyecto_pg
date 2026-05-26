@@ -24,25 +24,52 @@ public class MainController {
     @FXML private void abrirRotaciones()   { cargarVista("/fxml/rotaciones.fxml"); }
     @FXML private void abrirAccesos()      { cargarVista("/fxml/accesos.fxml"); }
 
-    @FXML
-    private void cerrarSesion() {
-        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle("Cerrar sesion");
-        confirmacion.setHeaderText("¿Esta seguro que desea cerrar sesion?");
-        confirmacion.setContentText("Se perderan los datos no guardados.");
+   @FXML
+private void cerrarSesion() {
+    Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+    confirmacion.setTitle("Cerrar sesión");
+    confirmacion.setHeaderText("¿Desea cerrar sesión?");
+    confirmacion.setContentText("Se perderán los datos no guardados.\nEsta acción no se puede deshacer.");
 
-        Optional<ButtonType> resultado = confirmacion.showAndWait();
-        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            try {
-                Parent login = FXMLLoader.load(
-                        getClass().getResource("/fxml/login.fxml"));
-                panelPrincipal.getScene().setRoot(login);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+    ButtonType btnSi = new ButtonType("✅  Sí, cerrar sesión");
+    ButtonType btnNo = new ButtonType("❌  No, quedarse");
+    confirmacion.getButtonTypes().setAll(btnSi, btnNo);
+
+    
+   confirmacion.getDialogPane().setStyle(
+    "-fx-background-color: white;" +
+    "-fx-border-color: #1E3A5F;" +
+    "-fx-border-width: 2;" +
+    "-fx-border-radius: 10;" +
+    "-fx-background-radius: 10;"
+);
+    confirmacion.getDialogPane().lookup(".header-panel").setStyle(
+    "-fx-background-color: #EFF6FF;" +
+    "-fx-background-radius: 8 8 0 0;"
+);
+   confirmacion.getDialogPane().lookup(".header-panel .label").setStyle(
+    "-fx-text-fill: white;" +
+    "-fx-font-size: 15px;" +
+    "-fx-font-weight: bold;" +
+    "-fx-opacity: 1;"
+);
+   confirmacion.getDialogPane().lookup(".content.label").setStyle(
+    "-fx-text-fill: #374151;" +
+    "-fx-font-size: 13px;"
+);
+
+    Optional<ButtonType> resultado = confirmacion.showAndWait();
+    if (resultado.isPresent() && resultado.get() == btnSi) {
+        try {
+            Parent login = FXMLLoader.load(
+                    getClass().getResource("/fxml/login.fxml"));
+            panelPrincipal.getScene().setRoot(login);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        // Si presiona Cancelar o cierra el dialogo, no hace nada
     }
+}
 
     private void cargarVista(String ruta) {
         try {

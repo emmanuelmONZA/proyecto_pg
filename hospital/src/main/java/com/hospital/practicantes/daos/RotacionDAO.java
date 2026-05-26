@@ -20,7 +20,7 @@ public class RotacionDAO implements CrudDAO<Rotacion> {
                 VALUES (?, ?, ?, ?, ?, ?, ?)
                 """;
         try (Connection conn = persistence.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, r.getArea());
             ps.setDate(2, Date.valueOf(r.getFechaInicio()));
@@ -42,8 +42,8 @@ public class RotacionDAO implements CrudDAO<Rotacion> {
         String sql = "SELECT * FROM rotaciones ORDER BY fecha_inicio, hora_inicio";
 
         try (Connection conn = persistence.conectar();
-             Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
                 Rotacion r = new Rotacion(
@@ -54,8 +54,7 @@ public class RotacionDAO implements CrudDAO<Rotacion> {
                         rs.getTime("hora_inicio").toString().substring(0, 5),
                         rs.getTime("hora_fin").toString().substring(0, 5),
                         rs.getInt("cupo_maximo"),
-                        rs.getString("docente")
-                );
+                        rs.getString("docente"));
                 lista.add(r);
             }
         } catch (SQLException e) {
@@ -63,4 +62,40 @@ public class RotacionDAO implements CrudDAO<Rotacion> {
         }
         return lista;
     }
+
+    @Override
+    public void eliminar(int id) {
+        String sql = "DELETE FROM rotaciones WHERE id = ?";
+        try (Connection conn = persistence.conectar();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al eliminar rotacion: " + e.getMessage(), e);
+        }
+    }
+
+    public void actualizar(Rotacion r) {
+        String sql = """
+                UPDATE rotaciones
+                SET area = ?, fecha_inicio = ?, fecha_fin = ?,
+                    hora_inicio = ?, hora_fin = ?, cupo_maximo = ?, docente = ?
+                WHERE id = ?
+                """;
+        try (Connection conn = persistence.conectar();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, r.getArea());
+            ps.setDate(2, Date.valueOf(r.getFechaInicio()));
+            ps.setDate(3, Date.valueOf(r.getFechaFin()));
+            ps.setTime(4, Time.valueOf(r.getHoraInicio() + ":00"));
+            ps.setTime(5, Time.valueOf(r.getHoraFin() + ":00"));
+            ps.setInt(6, r.getCupoMaximo());
+            ps.setString(7, r.getDocente());
+            ps.setInt(8, r.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar rotacion: " + e.getMessage(), e);
+        }
+    }
+
 }

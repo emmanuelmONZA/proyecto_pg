@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ComboBox?>
 
 <BorderPane style="-fx-background-color: #F3F7FA;"
             xmlns="http://javafx.com/javafx/21"
@@ -159,10 +160,33 @@
                                       -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
 
                     <Label text="Servicio"
-                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
-                    <TextField fx:id="txtServicio" promptText="Urgencias, Pediatria..."
-                               style="-fx-background-radius: 8; -fx-border-radius: 8;
-                                      -fx-border-color: #D1D5DB; -fx-padding: 9; -fx-font-size: 13px;" />
+       style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151;" />
+<ComboBox fx:id="cmbServicio" maxWidth="Infinity"
+          promptText="Seleccione un servicio..."
+          style="-fx-background-radius: 8; -fx-border-radius: 8;
+                 -fx-border-color: #D1D5DB; -fx-font-size: 13px;" />
+
+                 <HBox spacing="8">
+    <Button HBox.hgrow="ALWAYS" maxWidth="Infinity"
+            mnemonicParsing="false"
+            onAction="#guardarAcceso" text="Guardar acceso"
+            style="-fx-background-color: #1A56DB; -fx-text-fill: white;
+                   -fx-font-weight: bold; -fx-background-radius: 9;
+                   -fx-padding: 11; -fx-font-size: 13px; -fx-cursor: hand;" />
+    <Button HBox.hgrow="ALWAYS" maxWidth="Infinity"
+            mnemonicParsing="false"
+            onAction="#eliminarAcceso" text="Eliminar"
+            style="-fx-background-color: #FEF2F2; -fx-text-fill: #DC2626;
+                   -fx-font-weight: bold; -fx-background-radius: 9;
+                   -fx-padding: 11; -fx-font-size: 13px; -fx-cursor: hand;
+                   -fx-border-color: #FECACA; -fx-border-radius: 9;" />
+    <Button HBox.hgrow="ALWAYS" maxWidth="Infinity"
+            mnemonicParsing="false"
+            onAction="#limpiarFormulario" text="Cancelar"
+            style="-fx-background-color: #F3F4F6; -fx-text-fill: #374151;
+                   -fx-font-weight: bold; -fx-background-radius: 9;
+                   -fx-padding: 11; -fx-font-size: 13px; -fx-cursor: hand;" />
+</HBox>
 
                     <!-- Tipo con botones toggle -->
                     <Label text="Tipo de acceso"
@@ -192,22 +216,6 @@
                     <!-- Mensaje feedback -->
                     <Label fx:id="lblMensaje" text="" wrapText="true"
                            style="-fx-font-size: 12px; -fx-text-fill: #059669;" />
-
-                    <!-- Botones -->
-                    <HBox spacing="8">
-                        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity"
-                                mnemonicParsing="false"
-                                onAction="#guardarAcceso" text="Guardar acceso"
-                                style="-fx-background-color: #1A56DB; -fx-text-fill: white;
-                                       -fx-font-weight: bold; -fx-background-radius: 9;
-                                       -fx-padding: 11; -fx-font-size: 13px; -fx-cursor: hand;" />
-                        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity"
-                                mnemonicParsing="false"
-                                onAction="#limpiarFormulario" text="Cancelar"
-                                style="-fx-background-color: #F3F4F6; -fx-text-fill: #374151;
-                                       -fx-font-weight: bold; -fx-background-radius: 9;
-                                       -fx-padding: 11; -fx-font-size: 13px; -fx-cursor: hand;" />
-                    </HBox>
 
                     <!-- Validaciones -->
                     <VBox spacing="6"

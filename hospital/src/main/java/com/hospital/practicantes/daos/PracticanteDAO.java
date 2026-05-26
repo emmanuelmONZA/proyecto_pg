@@ -68,4 +68,40 @@ public class PracticanteDAO implements CrudDAO<Practicante> {
         }
         return lista;
     }
+
+    public void eliminar(int id) {
+    String sql = "DELETE FROM practicantes WHERE id = ?";
+    try (Connection conn = persistence.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        throw new RuntimeException("Error al eliminar practicante: " + e.getMessage(), e);
+    }
+}
+
+public void actualizar(Practicante p) {
+    String sql = """
+            UPDATE practicantes
+            SET nombre = ?, documento = ?, universidad = ?, semestre = ?,
+                programa = ?, docente = ?, induccion_realizada = ?, arl_vigente = ?, estado = ?
+            WHERE id = ?
+            """;
+    try (Connection conn = persistence.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, p.getNombre());
+        ps.setString(2, p.getDocumento());
+        ps.setString(3, p.getUniversidad());
+        ps.setString(4, p.getSemestre());
+        ps.setString(5, p.getPrograma());
+        ps.setString(6, p.getDocente());
+        ps.setBoolean(7, p.isInducionRealizada());
+        ps.setBoolean(8, p.isArlVigente());
+        ps.setString(9, p.getEstado());
+        ps.setInt(10, p.getId());
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        throw new RuntimeException("Error al actualizar practicante: " + e.getMessage(), e);
+    }
+}
 }

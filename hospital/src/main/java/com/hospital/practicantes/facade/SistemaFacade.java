@@ -9,12 +9,8 @@ import com.hospital.practicantes.entities.Rotacion;
 
 import java.util.List;
 
-/**
- * patron Facade
- */
 public class SistemaFacade {
 
-    // Singleton
     private static final SistemaFacade INSTANCIA = new SistemaFacade();
 
     private final PracticanteDAO practicanteDAO;
@@ -23,21 +19,31 @@ public class SistemaFacade {
 
     private SistemaFacade() {
         practicanteDAO = new PracticanteDAO();
-        rotacionDAO    = new RotacionDAO();
-        accesoDAO      = new AccesoDAO();
+        rotacionDAO = new RotacionDAO();
+        accesoDAO = new AccesoDAO();
     }
 
     public static SistemaFacade getInstancia() {
         return INSTANCIA;
     }
 
-    // Practicantes 
+    // Eliminar practicante
+    public void eliminarPracticante(int id) {
+        practicanteDAO.eliminar(id);
+    }
+
+    // Eliminar acceso
+    public void eliminarAcceso(int id) {
+        accesoDAO.eliminar(id);
+    }
+
+    // Practicantes
 
     public void registrarPracticante(String nombre, String documento,
-                                     String universidad, String semestre,
-                                     String programa, String docente,
-                                     boolean induccion, boolean arl,
-                                     String estado) {
+            String universidad, String semestre,
+            String programa, String docente,
+            boolean induccion, boolean arl,
+            String estado) {
         int id = practicanteDAO.listar().size() + 1;
         Practicante p = new Practicante(id, nombre, documento,
                 universidad, semestre, programa, docente, induccion, arl, estado);
@@ -48,11 +54,11 @@ public class SistemaFacade {
         return practicanteDAO.listar();
     }
 
-    // Rotaciones 
+    // Rotaciones
 
     public void registrarRotacion(String area, String fechaInicio, String fechaFin,
-                                  String horaInicio, String horaFin,
-                                  int cupoMaximo, String docente) {
+            String horaInicio, String horaFin,
+            int cupoMaximo, String docente) {
         int id = rotacionDAO.listar().size() + 1;
         Rotacion r = new Rotacion(id, area, fechaInicio, fechaFin,
                 horaInicio, horaFin, cupoMaximo, docente);
@@ -63,10 +69,10 @@ public class SistemaFacade {
         return rotacionDAO.listar();
     }
 
-    // ---- Accesos ----
+    // Accesos
 
     public void registrarAcceso(String practicante, String fecha,
-                                String hora, String servicio, String tipo) {
+            String hora, String servicio, String tipo) {
         int id = accesoDAO.listar().size() + 1;
         RegistroAcceso ra = new RegistroAcceso(id, practicante, fecha, hora, servicio, tipo);
         accesoDAO.guardar(ra);
@@ -74,5 +80,17 @@ public class SistemaFacade {
 
     public List<RegistroAcceso> listarAccesos() {
         return accesoDAO.listar();
+    }
+
+    public void actualizarPracticante(Practicante p) {
+        practicanteDAO.actualizar(p);
+    }
+
+    public void actualizarRotacion(Rotacion r) {
+        rotacionDAO.actualizar(r);
+    }
+
+    public void actualizarAcceso(RegistroAcceso r) {
+        accesoDAO.actualizar(r);
     }
 }

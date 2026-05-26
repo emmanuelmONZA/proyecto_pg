@@ -67,7 +67,7 @@ public class RotacionController {
     }
 
     @FXML private void filtrarTodos()  { filtroActivo = "todos";   actualizarPanel(); }
-    @FXML private void filtrarManana() { filtroActivo = "manana";  actualizarPanel(); }
+    @FXML private void filtrarManana() { filtroActivo = "mañana";  actualizarPanel(); }
     @FXML private void filtrarTarde()  { filtroActivo = "tarde";   actualizarPanel(); }
     @FXML private void filtrarNoche()  { filtroActivo = "noche";   actualizarPanel(); }
 
@@ -219,7 +219,7 @@ public class RotacionController {
     private String turnoDeHora(String horaInicio) {
         try {
             int hora = Integer.parseInt(horaInicio.split(":")[0]);
-            if (hora < 12) return "manana";
+            if (hora < 12) return "mañana";
             if (hora < 18) return "tarde";
             return "noche";
         } catch (Exception e) { return "mañana"; }

@@ -8,6 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 
 <ScrollPane fitToWidth="true"
             style="-fx-background-color: #F3F7FA; -fx-background: #F3F7FA;"
@@ -104,7 +107,6 @@
 
       </HBox>
 
-      <!-- FILA 2: Distribucion + Alertas recientes -->
       <GridPane hgap="16" vgap="16">
         <columnConstraints>
           <ColumnConstraints percentWidth="55" />
@@ -116,7 +118,7 @@
               style="-fx-background-color: white; -fx-background-radius: 14;
                      -fx-border-color: #E5E7EB; -fx-border-radius: 14; -fx-padding: 20;
                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);">
-          <Label text="Distribucion actual por area"
+          <Label text="Distribución actual por área"
                  style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #111827;" />
 
           <!-- Urgencias -->
@@ -159,6 +161,22 @@
             <Region HBox.hgrow="ALWAYS"/>
             <Label text="12/15" style="-fx-text-fill: #10B981; -fx-font-weight: bold; -fx-font-size: 12px;" />
           </HBox>
+
+          <!-- Separador -->
+          <Region prefHeight="4" />
+
+          <!-- Gráfica compacta -->
+          <LineChart fx:id="graficaServicios"  prefHeight="160.0" prefWidth="320.0"
+          animated="false" legendVisible="false"
+          style="-fx-background-color: transparent; -fx-padding: 0;">
+          <xAxis>
+          <CategoryAxis style="-fx-tick-label-font-size: 10px;" />
+          </xAxis>
+          <yAxis>
+          <NumberAxis lowerBound="0" upperBound="25" tickUnit="5"
+          style="-fx-tick-label-font-size: 10px;" />
+          </yAxis>
+       </LineChart>
 
         </VBox>
 
@@ -274,6 +292,6 @@
         </HBox>
       </VBox>
 
-    </VBox>
-  </content>
+</VBox>
+</content>
 </ScrollPane>
